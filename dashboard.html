@@ -1,0 +1,89 @@
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<title>VojVoj</title>
+<link rel="icon" href="/VojVoj/images/VojVojLogo.jpg"
+	type="image/x-icon">
+<link rel="stylesheet" href="/VojVoj/css/index.css"
+	type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+
+</head>
+<body onload="myFunction()">
+	<br>
+	<div id="loading"></div>
+
+	<div class="main container-fluid ">
+		<div class="row justify-content-center">
+			<img id="voj" src="/VojVoj/images/vojvoj.png"
+				alt="VojVoj Logo">
+		</div>
+		
+		<!--  <div class="gauge">
+            <div class="gaugeBody">
+                <div class="gaugeFillNew"></div>
+                <div class="gaugeFillOld"></div>
+                <div class="gaugeCover"></div>
+            </div>
+        </div>
+         -->
+		<br>  
+		<hr>
+
+		<div class="row justify-content-center">
+			<a href="/VojVoj/VojVojApi/userProfiles"
+				class="btn btn-outline-info col-2 mb-2 ">User
+				Profiles</a>
+		</div>
+
+		<div class="row justify-content-center">
+			<a href="/VojVoj/VojVojApi/postLog"
+				class="btn btn-outline-info col-2 mb-2">Posts logs</a>
+		</div>
+
+		<div class="row justify-content-center">
+			<a href="/VojVoj/VojVojApi/activityLog"
+				class="btn btn-outline-info col-2 mb-2">User Activity Logs</a>
+		</div>
+
+		<div class="row justify-content-center">
+			<a href="/VojVoj/VojVojApi/countActivityLog"
+				class="btn btn-outline-info col-2 mb-2">Activity Count</a>
+		</div>
+		
+		<div class="row justify-content-center">
+			<a href="/VojVoj/VojVojApi/monthlyActivityCount"
+				class="btn btn-outline-info col-2 mb-2">Monthly Activity Count</a>
+		</div>
+		
+	</div>
+
+	<script>
+		var preloader = document.getElementById("loading");
+		function myFunction() {
+			preloader.style.display = 'none';
+		}
+	</script>
+	<!-- <script th:inline = "javascript">
+    const gaugeElement = document.querySelector(".gauge");
+
+    function setGaugeValue(gauge, valueNew , valueOld ){
+  
+        if(valueNew < 0 || valueNew > 1 && valueOld < 0 || valueOld > 1 ){
+            return;
+        }
+        gauge.querySelector(".gaugeFillNew").style.transform = `rotate(${valueNew /2}turn)`; 
+        gauge.querySelector(".gaugeFillOld").style.transform = `rotate(${valueOld /2}turn)`; 
+        gauge.querySelector(".gaugeCover").textContent = `${Math.round(valueOld * 100)}% - ${Math.round(valueNew * 100)}%`;
+    }
+    setGaugeValue(gaugeElement ,"[[${totalGrowthTokenPurchase}]]","[[${growthTokenPurchase}]]")
+
+</script>
+ -->	
+
+</body>
+</html>
