@@ -1,0 +1,11 @@
+body{
+    background-image:url(" VojVoj_Website_Background.jpg") ;
+    background-repeat: no-repeat;
+    background-size: cover;
+} 
+.charts{
+    width: 30%;
+    height: 30%;
+    margin: 3%;
+    padding: 0;
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="index.css" type="text/css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>chartJs</title>
+</head>
+
+<body>
+    <div class="charts">
+        <canvas id="myChart"></canvas>
+        <button onclick="addDataset()">Add Dataset</button>
+        <button onclick="addData()">Add Data</button>
+        <button onclick="removeData()">Remove Data</button>
+        <button onclick="removeDataset()">Remove Dataset</button>
+        <button onclick="addMonth(50)" id="addMonth">add Month</button>
+        <button onclick="addDataToMonth()">Add Data to month</button>
+
+    </div>
+
+    <script>
+        const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+        const MONTH_COUNT = 3;
+        var prevMonth = new Date().getMonth();
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const data = {
+            labels: [MONTHS[prevMonth - 2], MONTHS[prevMonth - 1], MONTHS[prevMonth]],
+             //labels: [MONTHS[prevMonth], MONTHS[prevMonth-1],MONTHS[prevMonth-2]],
+            datasets: [{
+                label: 'Active User',
+                data: [30, 90, 23],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2 )',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+        const myChart = new Chart(ctx, {
+
+            type: 'bar',//bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'white'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: 'white', beginAtZero: true },
+                        grid: { borderColor: 'white' }
+                    },
+                    x: {
+                        time: 'time',
+                        time: {
+                            unit: 'month'
+                        },
+                        ticks: { color: 'white', beginAtZero: true },
+                        grid: { borderColor: 'white' }
+
+                    }
+                }
+            }
+        });
+         prevMonth = prevMonth - 2;
+        function addMonth(value) {
+
+            var x = document.getElementById('addMonth');
+            if (prevMonth == 0) {
+                x.setAttribute("disabled", true);
+            } else {
+                //myChart.data.labels = [MONTHS[prevMonth - 3], MONTHS[prevMonth - 2], MONTHS[prevMonth - 1]];
+                //prevMonth = prevMonth - 3;
+                 //myChart.data.labels.push(MONTHS[prevMonth -1]);
+                 myChart.data.labels.unshift(MONTHS[prevMonth-1]);
+                 prevMonth = prevMonth - 1;
+                 myChart.data.datasets[0].data.unshift(value);                 
+
+                if (prevMonth == 0) {
+                    x.setAttribute("disabled", true);
+                }
+
+            }
+            myChart.update();
+        }
+
+
+        function addDataToMonth(value) {
+            myChart.data.datasets[0].data.unshift(value);//.pop();or .shift();
+            myChart.update();
+        }
+
+
+        function addData(value) {
+             myChart.data.datasets[1].data.push(value);//.pop();or .shift();
+             myChart.update();
+        }
+        function removeData() {
+            myChart.data.datasets[1].data.pop();//.pop();or .shift();
+            myChart.update();
+        }
+
+
+
+
+        //ADD dataset
+        function addDataset() {
+            const newDataset = {
+                label: 'Dataset #' + (data.datasets.length + 1),
+                data: [20, 40, 60, 80, 90],
+                backgroundColor: 'rgba(1,10,100,0.2)',
+                borderColor: 'rgba(220,220,220,20.2)',
+                borderWidth: 1
+            };
+            myChart.data.datasets.push(newDataset);
+            myChart.update();
+        };
+        function removeDataset() {
+            myChart.data.datasets.pop();//.pop();or .shift();
+            myChart.update();
+        }
+    </script>
+</body>
+
+</html>
